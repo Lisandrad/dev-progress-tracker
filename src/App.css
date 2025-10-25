@@ -11,3 +11,50 @@ h1 {
   margin-bottom: 2rem;
   color: #00d9ff;
 }
+
+.add-task-form {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 0.7rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: white;
+  font-size: 0.95rem;
+}
+
+.task-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.task-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.add-button {
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.add-button:hover {
+  transform: translateY(-2px);
+}
+
+.add-button:active {
+  transform: translateY(0);
+}

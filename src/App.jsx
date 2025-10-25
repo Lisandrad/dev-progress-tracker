@@ -5,19 +5,31 @@ import { phases } from './data.js'
 function App() {
   const firstPhase = phases[0];
   const [completedTasks, setCompletedTasks] = useState([]);
+  const [customTasks, setCustomTasks] = useState([]);
+  const [newTaskText, setNewTaskText] = useState('');
+
+ useEffect(() => {
+  const savedCompleted = localStorage.getItem('completedTasks');
+  const savedCustom = localStorage.getItem('customTasks');
+  
+  if (savedCompleted) {
+    setCompletedTasks(JSON.parse(savedCompleted));
+  }
+  if (savedCustom) {
+    setCustomTasks(JSON.parse(savedCustom));
+  }
+}, []);
 
   useEffect(() => {
-    const saved = localStorage.getItem('completedTasks');
-    if (saved) {
-      setCompletedTasks(JSON.parse(saved));
-    }
-  }, []);
+    localStorage.setItem('customTasks', JSON.stringify(customTasks))
+  }, [customTasks])
 
   useEffect(() => {
     localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
   }, [completedTasks]);
 
-  const totalTasks = firstPhase.tasks.length;
+  const allTask = [...firstPhase.tasks, ...customTasks]
+  const totalTasks = allTask.length;  
   const completedCount = completedTasks.length;
   const progressPercentage = Math.round((completedCount / totalTasks) * 100);
 
@@ -28,6 +40,19 @@ function App() {
       setCompletedTasks([...completedTasks, taskId]);
     }
   };
+
+  const handleAddTask = (e) => {
+    e.preventDefault();
+
+    if (newTaskText.trim() === '') return;
+
+    const newTask = {
+      id: `custom-${Date.now()}`,
+      text: newTaskText
+    };
+    setCustomTasks([...customTasks, newTask]);
+    setNewTaskText('');
+  }
 
   return (
     <div className="app-container">
@@ -50,8 +75,23 @@ function App() {
         <h2>{firstPhase.title}</h2>
         <p>{firstPhase.days}</p>
         
+        <form onSubmit={handleAddTask} className="add-task-form">
+          <input
+            type="text"
+            value={newTaskText}
+            onChange={(e) => setNewTaskText(e.target.value)}
+            placeholder="Agregar nueva tarea..."
+            className="task-input"
+          />
+          <button type="submit" className="add-button">
+            + Add 
+          </button>
+        </form>
+
+<div></div>
+
         <div>
-          {firstPhase.tasks.map((task) => (
+          {allTask.map((task) =>   (
             <div key={task.id}>
               <input 
                 type="checkbox" 
