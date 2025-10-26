@@ -1,11 +1,11 @@
-# 📋 Hierarchical Todo List
+# Hierarchical Todo List
 
 A web app for organizing tasks with nested subtasks. Built with React to help you break down complex projects into manageable pieces.
 
 🔗 **[Ver Demo](https://lisandrad.github.io/dev-progress-tracker/)**
 
 ## What it does
-This isn't your typical todo list. You can create parent tasks and nest subtasks inside them—as many levels deep as you need. Perfect for breaking down big projects into smaller steps.
+This can create parent tasks and nest subtasks inside them—as many levels deep as you need. Perfect for breaking down big projects into smaller steps.
 The progress bar automatically tracks everything, including nested tasks. When you check off all subtasks, the parent task marks itself complete. Uncheck a parent, and all its subtasks uncheck too.
 Everything saves to your browser automatically, so your tasks stick around even after closing the tab.
 
