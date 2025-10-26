@@ -1,16 +1,53 @@
-# React + Vite
+# Hierarchical Todo List
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web app for organizing tasks with nested subtasks. Built with React to help you break down complex projects into manageable pieces.
 
-Currently, two official plugins are available:
+🔗 **[Ver Demo](https://lisandrad.github.io/dev-progress-tracker/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What it does
+This can create parent tasks and nest subtasks inside them—as many levels deep as you need. Perfect for breaking down big projects into smaller steps.
+The progress bar automatically tracks everything, including nested tasks. When you check off all subtasks, the parent task marks itself complete. Uncheck a parent, and all its subtasks uncheck too.
+Everything saves to your browser automatically, so your tasks stick around even after closing the tab.
 
-## React Compiler
+## Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Create main tasks and add subtasks underneath them
+- Unlimited nesting levels—organize however you want
+- Smart checkboxes that handle parent-child relationships
+- Expand/collapse tasks to keep things tidy
+- Visual progress bar that counts everything
+- Works on desktop and mobile
+- No signup needed—runs entirely in your browser
 
-## Expanding the ESLint configuration
+##  Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 18
+- Vite
+- CSS3
+- localStorage API
+- GitHub Pages
+- 
+##  Running Locally
+
+### You'll need:
+
+- Node.js (v16 o superior)
+- npm o yarn
+
+
+
+## Estructura del Proyecto
+```
+dev-progress-tracker/
+├── src/
+│   ├── App.jsx              # Componente principal
+│   ├── App.css              # Estilos globales
+│   ├── TaskItem.jsx         # Componente recursivo de tarea
+│   ├── data.js              # Estructura de datos inicial
+│   └── main.jsx             # Entry point
+├── public/
+├── index.html
+├── vite.config.js
+└── package.json
+```
+
