@@ -203,6 +203,21 @@ return (
         ))
       )}
     </div>
+
+      <footer className="footer">
+  <p>Made by <strong>Lisandra</strong></p>
+  <p className="footer-links">
+    <a href="https://github.com/Lisandrad" target="_blank" rel="noopener noreferrer">
+      GitHub
+    </a>
+    {' • '}
+    <a href="https://github.com/Lisandrad/dev-progress-tracker" target="_blank" rel="noopener noreferrer">
+      View Source
+    </a>
+  </p>
+</footer>
+
+
   </div>
 )
 }
