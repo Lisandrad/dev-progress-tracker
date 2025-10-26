@@ -2,6 +2,8 @@
 
 Una aplicación web de lista de tareas jerárquica construida con React, que permite organizar tareas con subtareas anidadas y trackear el progreso en tiempo real.
 
+🔗 **[Ver Demo](https://lisandrad.github.io/dev-progress-tracker/)**
+
 ## ✨ Características
 
 - ✅ **Tareas Jerárquicas**: Crea tareas padre con subtareas anidadas
@@ -94,8 +96,6 @@ dev-progress-tracker/
 ├── vite.config.js
 └── package.json
 ```
-
-
 ## 🧠 Conceptos Aprendidos
 
 Este proyecto fue desarrollado como parte de mi aprendizaje de desarrollo web. Durante su construcción aprendí:
@@ -107,3 +107,14 @@ Este proyecto fue desarrollado como parte de mi aprendizaje de desarrollo web. D
 - ✅ **Deploy**: Configuración de GitHub Pages con Vite
 - ✅ **Lógica Condicional**: Cascada de completados padre-hijo
 - ✅ **localStorage**: Persistencia de datos sin backend
+
+## Próximas Mejoras
+
+- [ ] Drag & drop para reordenar tareas
+- [ ] Filtros (completadas, pendientes, todas)
+- [ ] Búsqueda de tareas
+- [ ] Categorías con colores
+- [ ] Fechas de vencimiento
+- [ ] Dark/Light mode toggle
+- [ ] Exportar a JSON/CSV
+- [ ] Backend con autenticación (multi-usuario)
