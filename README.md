@@ -1,88 +1,42 @@
 # 📋 Hierarchical Todo List
 
-Una aplicación web de lista de tareas jerárquica construida con React, que permite organizar tareas con subtareas anidadas y trackear el progreso en tiempo real.
+A web app for organizing tasks with nested subtasks. Built with React to help you break down complex projects into manageable pieces.
 
 🔗 **[Ver Demo](https://lisandrad.github.io/dev-progress-tracker/)**
 
-## ✨ Características
+## What it does
+This isn't your typical todo list. You can create parent tasks and nest subtasks inside them—as many levels deep as you need. Perfect for breaking down big projects into smaller steps.
+The progress bar automatically tracks everything, including nested tasks. When you check off all subtasks, the parent task marks itself complete. Uncheck a parent, and all its subtasks uncheck too.
+Everything saves to your browser automatically, so your tasks stick around even after closing the tab.
 
-- ✅ **Tareas Jerárquicas**: Crea tareas padre con subtareas anidadas
-- ✅ **Progreso Inteligente**: Calcula automáticamente el progreso total incluyendo subtareas
-- ✅ **Expandir/Colapsar**: Organiza visualmente tus tareas
-- ✅ **Persistencia Local**: Tus tareas se guardan automáticamente en localStorage
-- ✅ **Interfaz Intuitiva**: Diseño limpio con paleta de colores cohesiva
-- ✅ **Responsive**: Funciona perfectamente en desktop y móvil
-- ✅ **Completado en Cascada**: Al completar todas las subtareas, la tarea padre se marca automáticamente
+## Key Features
 
-## Funcionalidades Principales:
+- Create main tasks and add subtasks underneath them
+- Unlimited nesting levels—organize however you want
+- Smart checkboxes that handle parent-child relationships
+- Expand/collapse tasks to keep things tidy
+- Visual progress bar that counts everything
+- Works on desktop and mobile
+- No signup needed—runs entirely in your browser
 
-1. **Agregar Tarea Principal**
-   - Input principal para crear tareas de nivel superior
+##  Tech Stack
 
-2. **Agregar Subtareas**
-   - Botón "+" en cada tarea para agregar subtareas
-   - Anidación ilimitada de niveles
+- React 18
+- Vite
+- CSS3
+- localStorage API
+- GitHub Pages
+- 
+##  Running Locally
 
-3. **Marcar como Completada**
-   - Checkbox para cada tarea
-   - Lógica inteligente: desmarca todas las hijas si desmarcas el padre
-   - Marca el padre automáticamente si todas las hijas están completas
-
-4. **Eliminar Tareas**
-   - Botón "✕" elimina la tarea y todas sus subtareas
-
-5. **Barra de Progreso**
-   - Muestra progreso visual y porcentaje
-   - Cuenta todas las tareas (incluyendo subtareas)\
-  
-## 🛠️ Tecnologías Utilizadas
-
-- **React 18** - Librería de UI
-- **Vite** - Build tool y dev server
-- **CSS3** - Estilos personalizados
-- **localStorage API** - Persistencia de datos
-- **GitHub Pages** - Hosting
-
-## 📦 Instalación y Uso Local
-
-### Prerrequisitos
+### You'll need:
 
 - Node.js (v16 o superior)
 - npm o yarn
 
-### Pasos
 
-1. **Clonar el repositorio**
-```bash
-   git clone https://github.com/Lisandrad/dev-progress-tracker.git
-   cd dev-progress-tracker
-```
 
-2. **Instalar dependencias**
-```bash
-   npm install
-```
-
-3. **Ejecutar en modo desarrollo**
-```bash
-   npm run dev
-```
-
-4. **Abrir en el navegador**
-```
-   http://localhost:5173
-```
-
-### Build para producción
-```bash
-npm run build
-```
-
-Los archivos optimizados estarán en la carpeta `dist/`.
-
----
-
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 ```
 dev-progress-tracker/
 ├── src/
@@ -96,25 +50,4 @@ dev-progress-tracker/
 ├── vite.config.js
 └── package.json
 ```
-## 🧠 Conceptos Aprendidos
 
-Este proyecto fue desarrollado como parte de mi aprendizaje de desarrollo web. Durante su construcción aprendí:
-
-- ✅ **Componentes Recursivos**: TaskItem se llama a sí mismo para renderizar subtareas
-- ✅ **Estado Complejo**: Manejo de objetos anidados con useState
-- ✅ **Refactorización**: Transformé un proyecto lineal en uno jerárquico
-- ✅ **Git Workflow**: Uso de branches, backups y buenas prácticas
-- ✅ **Deploy**: Configuración de GitHub Pages con Vite
-- ✅ **Lógica Condicional**: Cascada de completados padre-hijo
-- ✅ **localStorage**: Persistencia de datos sin backend
-
-## Próximas Mejoras
-
-- [ ] Drag & drop para reordenar tareas
-- [ ] Filtros (completadas, pendientes, todas)
-- [ ] Búsqueda de tareas
-- [ ] Categorías con colores
-- [ ] Fechas de vencimiento
-- [ ] Dark/Light mode toggle
-- [ ] Exportar a JSON/CSV
-- [ ] Backend con autenticación (multi-usuario)
