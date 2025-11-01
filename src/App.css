@@ -136,6 +136,7 @@ h1 {
 .task-item:hover {
   background: rgba(255, 255, 255, 0.08);
   border-left-color: #667eea;
+  opacity: 1;
 }
 
 .task-content {
@@ -195,6 +196,12 @@ h1 {
 
 .task-item:hover .task-actions {
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .task-actions {
+    opacity: 1;  
+  }
 }
 
 .action-button {
