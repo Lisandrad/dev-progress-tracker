@@ -4,10 +4,27 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg-primary: #2A3A2E;        /* Fondo principal oscuro */
+  --bg-secondary: #415245;      /* Cards y contenedores */
+  --bg-tertiary: #8D9F91;       /* Hover states */
+  
+  --accent-primary: #8C8159;    /* Botones principales */
+  --accent-secondary: #8D9F91;  /* Acentos secundarios */
+  
+  --text-primary: #E8F0EC;      /* Texto principal */
+  --text-secondary: #B5C4BA;    /* Texto secundario */
+  
+  /* Transparencias útiles */
+  --overlay-light: rgba(141, 159, 145, 0.1);
+  --overlay-medium: rgba(141, 159, 145, 0.2);
+}
+
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #003300;
-  color: #eee;
+  background-color:  var(--bg-primary);
+  color: var(--text-primary);
   line-height: 1.6;
 }
 
@@ -22,12 +39,12 @@ h1 {
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 2rem;
-  color: #b794f6;
+  color: var(--accent-secondary);
 }
 
 
 .progress-container {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-secondary);
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 2rem;
@@ -51,7 +68,7 @@ h1 {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   transition: width 0.3s ease;
   border-radius: 10px;
 }
@@ -86,7 +103,7 @@ h1 {
 
 .add-button {
   padding: 0.8rem 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
   border: none;
   border-radius: 6px;
   color: white;
