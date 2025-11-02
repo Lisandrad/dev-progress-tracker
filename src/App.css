@@ -314,11 +314,11 @@ h1 {
 
 /* Footer */
 .footer {
-  margin-top: 4rem;
+ margin-top: 4rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(141, 159, 145, 0.2);  /* ← Verde sutil */
   text-align: center;
-  color: #888;
+  color: var(--text-secondary);  /* ← Verde claro */
   font-size: 0.9rem;
 }
 
@@ -327,7 +327,7 @@ h1 {
 }
 
 .footer strong {
-  color: #2A3A2E;  /* Morado suave que combina */
+   color: var(--accent-secondary);  /* ← Verde medio */
   font-weight: 600;
 }
 
@@ -339,12 +339,12 @@ h1 {
 }
 
 .footer a {
-  color: #2A3A2E;
+  color: var(--accent-primary);  /* ← Verde oliva */
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .footer a:hover {
-  color: #A4B8A3;
+  color: var(--accent-secondary);  /* ← Verde medio al hover */
   text-decoration: underline;
 }
