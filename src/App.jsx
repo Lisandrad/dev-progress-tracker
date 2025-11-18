@@ -179,6 +179,19 @@ return (
     className='task-input'
     >
     </input>
+{/*Para agregar fecha a las tareas con Datepicker*/}
+<div className='date-checkboc-container'>
+  <label>
+    <input
+      type='checkbox'
+      checked={showDataPicker}
+      onChange={(e) => setShowDataPicker(e.target.checked)}
+    /> Add due date for the task
+  </label>
+
+</div>
+
+
     <button type='submit' className='add-button'>
       + Add Task
     </button>
