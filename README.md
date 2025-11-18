@@ -40,11 +40,11 @@ Everything saves to your browser automatically, so your tasks stick around even 
 ```
 dev-progress-tracker/
 ├── src/
-│   ├── App.jsx              # Componente principal
-│   ├── App.css              # Estilos globales
-│   ├── TaskItem.jsx         # Componente recursivo de tarea
-│   ├── data.js              # Estructura de datos inicial
-│   └── main.jsx             # Entry point
+│   ├── App.jsx              
+│   ├── App.css              
+│   ├── TaskItem.jsx         
+│   ├── data.js              
+│   └── main.jsx             
 ├── public/
 ├── index.html
 ├── vite.config.js
