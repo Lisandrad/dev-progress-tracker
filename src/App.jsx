@@ -7,6 +7,10 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [newTaskText, setNewTaskText] = useState('');
   const [addingSubtaskTo, setAddingSubtaskTo] = useState(null);
+  const [showDataPicker, setShowDataPicker] = useState(false)
+  const [selectedDate, setSelectedDate] = useState(null)
+
+
 
   //useEffect 1-------------
  useEffect(() => {
