@@ -2,17 +2,18 @@ import { useState, useEffect } from 'react';
 import './App.css'
 import { initialTasks } from './data.js'
 import TaskItem from './TaskItem.jsx' 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTaskText, setNewTaskText] = useState('');
   const [addingSubtaskTo, setAddingSubtaskTo] = useState(null);
-  const [showDataPicker, setShowDataPicker] = useState(false)
+  const [showDatePicker, setShowDatePicker] = useState(false)
   const [selectedDate, setSelectedDate] = useState(null)
 
 
 
-  //useEffect 1-------------
  useEffect(() => {
   const savedTasks = localStorage.getItem('tasks');
   
@@ -24,10 +25,46 @@ function App() {
   }
 }, []);
 
-//useEffect 2-------------
  
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks]);
+
+  useEffect (() => {
+    if (Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+  }, []);
+
+  useEffect (() => {
+    const checkUrgentTasks = () => {
+      tasks.forEach(task => {
+        if (task.dueDate && !task.completed) {
+          const timeRemaining = getTimeRemaining(task.dueDate);
+          console.log('Revisando tarea:', task.text, 'Estado:', timeRemaining?.status);  
+          if (timeRemaining && (timeRemaining.status === 'urgent' || timeRemaining.status === 'overdue')) {
+            console.log('Notificación - Permiso:', Notification.permission); 
+            if (Notification.permission === 'granted') {
+              try {
+                new Notification('Task nearing due date', {
+                body: task.text,
+                tag: task.id // esto de aqui es para evitar que se dupliquen los avisos
+              })
+                console.log('Notificación enviada para:', task.text);              
+              } catch (error) {
+                console.error('Error enviando notificación:', error);
+              }
+              
+            }
+          }
+        }
+      })
+    }
+    checkUrgentTasks();
+
+    const interval = setInterval(checkUrgentTasks,60000);
+    return () => clearInterval(interval);
+
   }, [tasks]);
 
   const calculateProgress = () => {
@@ -95,8 +132,34 @@ const toggleExpand = (taskId) => {
   }
   setTasks(updateTasks(tasks));
 }
+//calculo del tiempo  de la tarea
+const getTimeRemaining = ( dueDateString) => {
+  if (!dueDateString) return null;
 
-//para agregar tarea "padre"
+  const now = new Date();
+  const dueDate = new Date(dueDateString);
+  const diffMs = dueDate - now;
+
+  if (diffMs < 0) {
+    return { status: 'overdue', text: 'Late!'};
+  }
+
+  const diffSeconds = Math.floor(diffMs / 1000);
+  const diffMinutes = Math.floor(diffSeconds/60);
+  const diffHours = Math.floor(diffMinutes /60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if(diffHours < 1) {
+    return { status: 'urgent', text: `Expires in ${diffMinutes} min`}
+  }
+  if (diffHours < 24) {
+    return { status: 'urgent', text: `Expires in ${diffHours}`}
+  }
+  return { status: 'normal', text: ` Expires in ${diffDays} days `}
+
+
+}
+//para agregar tarea "padre" "maintask"
 
 const addMainTask = (e) => {
   e.preventDefault();
@@ -107,11 +170,14 @@ const addMainTask = (e) => {
     text: newTaskText,
     completed: false,
     expanded: true,
+    dueDate: selectedDate ? selectedDate.toISOString() : null,
     subtasks: []
-  };
+  };  
 
   setTasks([...tasks, newTask]);
-  setNewTaskText ('')
+  setNewTaskText ('');
+  setSelectedDate(null);
+  setShowDatePicker(false);
 };
 
 //para agregar tarea hija:
@@ -183,16 +249,35 @@ return (
     className='task-input'
     >
     </input>
+
 {/*Para agregar fecha a las tareas con Datepicker*/}
 <div className='date-checkboc-container'>
   <label>
     <input
       type='checkbox'
-      checked={showDataPicker}
-      onChange={(e) => setShowDataPicker(e.target.checked)}
-    /> Add due date for the task
+      checked={showDatePicker}
+      onChange={(e) => setShowDatePicker(e.target.checked)}
+    /> Add due date
   </label>
 
+  {/*  Solo se muestra si checkbox está marcado */}
+  {showDatePicker && (
+    <DatePicker
+      selected={selectedDate}
+      onChange={(date) => setSelectedDate(date)}
+      showTimeSelect
+      timeIntervals={1}
+      dateFormat= "Pp"
+      placeholder="Select date and time"
+      minDate={new Date()}
+      className="date-picker-input"
+      popperPlacement="bottom"
+      autoFocus
+     
+    ></DatePicker>
+  )
+
+  }
 </div>
 
 
@@ -210,6 +295,7 @@ return (
             key={task.id}
             task={task}
             level={0}
+            getTimeRemaining={getTimeRemaining}
             onToggle={toggleTask}
             onDelete={deleteTask}
             onToggleExpand={toggleExpand}

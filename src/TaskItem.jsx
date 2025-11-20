@@ -3,17 +3,20 @@ import { useState } from "react";
 function TaskItem({
     task,
     level,
+    getTimeRemaining,
     onToggle,
     onDelete,
     onToggleExpand,
     onAddSubtask,
     addingSubtaskTo,
-    setAddingSubtaskTo
+    setAddingSubtaskTo,
+    
 }) {
     const [subtaskText, setSubtaskText] = useState('');
     const hasSubtasks = task.subtasks && task.subtasks.length > 0;
     const isExpanded = task.expanded;
     const isAddingSubtask = addingSubtaskTo === task.id;
+    const timeRemaining = task.dueDate ? getTimeRemaining(task.dueDate) : null;
 
     const handleAddSubtask = (e) => {
       e.preventDefault();
@@ -23,7 +26,7 @@ function TaskItem({
 
     return (
       <div className="task-item-wrapper" style={{marginLeft: `${level * 30}px`}}>
-        <div className="task-item">
+        <div className={`task-item ${timeRemaining?.status || ''}`}>
           <div className="task-content">
             {hasSubtasks && (
               <button
@@ -46,12 +49,24 @@ function TaskItem({
               className={task.completed ? 'completed' : ''}>
               {task.text}
             </label>
-            
+
+
             {hasSubtasks && (
               <span className="subtask-count">
                 ({task.subtasks.filter(s => s.completed).length}/{task.subtasks.length})
               </span>
             )}
+
+           {/*Fecha de vencimiento*/}
+
+           {task.dueDate && (
+            <div className={ `task-due-date ${timeRemaining?.status || ''}`}>
+              <span className="due-date-text"> 
+                {getTimeRemaining(task.dueDate)?.text}
+              </span>
+            </div>
+           )}
+
           </div>
 
           <div className="task-actions">
@@ -97,6 +112,7 @@ function TaskItem({
                 key={subtask.id}
                 task={subtask}
                 level={level + 1}
+                /*getTimeRemaining = {}*/
                 onToggle={onToggle}
                 onDelete={onDelete}
                 onToggleExpand={onToggleExpand}

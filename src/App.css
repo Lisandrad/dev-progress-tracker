@@ -348,3 +348,66 @@ h1 {
   color: var(--accent-secondary);  /* ← Verde medio al hover */
   text-decoration: underline;
 }
+
+.task-item.overdue {
+  border-left: 4px solid #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.task-item.urgent {
+  border-left: 4px solid #ffa500;
+  background-color: rgba(255, 165, 0, 0.1);
+}
+
+.task-due-date {
+  margin-left: auto;
+  margin-right: 1rem;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background-color: var(--overlay-light);
+  color: var(--text-secondary);
+}
+
+.task-due-date.overdue {
+  background-color: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+}
+
+.task-due-date.urgent {
+  background-color: rgba(255, 165, 0, 0.2);
+  color: #ffa500;
+}
+
+/*  estilos para el datepicker*/
+
+.date-picker-wrapper {
+  margin: 0.5rem 0;
+}
+
+.date-picker-input {
+   padding: 0.5rem 0.75rem;
+  border: 1px solid var(--text-secondary);
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.date-picker-input:focus {
+  outline: none;
+  border-color: var(--accent-secondary);
+  background-color: var(--bg-tertiary);
+}
+
+.date-picker-input:focus {
+  outline: none;
+  border-color: var(--accent-secondary);
+  background-color: var(--bg-tertiary);
+}
+
+
+
+
