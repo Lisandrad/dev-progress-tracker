@@ -41,9 +41,7 @@ function App() {
       tasks.forEach(task => {
         if (task.dueDate && !task.completed) {
           const timeRemaining = getTimeRemaining(task.dueDate);
-          console.log('Revisando tarea:', task.text, 'Estado:', timeRemaining?.status);  
           if (timeRemaining && (timeRemaining.status === 'urgent' || timeRemaining.status === 'overdue')) {
-            console.log('Notificación - Permiso:', Notification.permission); 
             if (Notification.permission === 'granted') {
               try {
                 new Notification('Task nearing due date', {
@@ -66,6 +64,16 @@ function App() {
     return () => clearInterval(interval);
 
   }, [tasks]);
+
+  useEffect(() => {
+    const updateInterval = setInterval(() => {
+      setTasks([...tasks])
+    }, 60000);
+    return () => clearInterval(updateInterval);
+  })
+
+
+
 
   const calculateProgress = () => {
     let total = 0;
