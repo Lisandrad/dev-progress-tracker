@@ -11,7 +11,8 @@ function App() {
   const [addingSubtaskTo, setAddingSubtaskTo] = useState(null);
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [selectedDate, setSelectedDate] = useState(null)
-
+  const [searchText, setSearchText] = useState('');
+  const [filterStatus, setFilterStatus] = useState('all');
 
 
  useEffect(() => {
@@ -167,6 +168,7 @@ const getTimeRemaining = ( dueDateString) => {
 
 
 }
+
 //para agregar tarea "padre" "maintask"
 
 const addMainTask = (e) => {
@@ -231,6 +233,20 @@ const deleteTask = (taskId) => {
   setTasks(removeTasks(tasks));
 }
 
+//logica de los filtros:
+
+const getFilteredTask = (taskList) => {
+  return taskList.filter(task => {
+    const matchesSearch = task.text.toLowerCase().includes(searchText.toLocaleLowerCase())
+    const matchesStatus =
+    filterStatus === 'all' ||
+    (filterStatus === 'completed' && task.completed) ||
+    (filterStatus === 'pending' && !task.completed);
+
+    return matchesSearch && matchesStatus
+  })
+}
+
 return (
   <div className='app-container'>
     <h1>ToDo List</h1>
@@ -246,7 +262,38 @@ return (
       </div>
     </div>
 
+{/*para buscar las tareas (todas) */}
+  <div className='search-container'>
+  <input
+  type='text'
+  value={searchText}
+  onChange={(e) => setSearchText(e.target.value)}
+  placeholder='Search task'
+  className='search-input'
+  />
+</div>
 
+{/*botones de filtro */}
+<div className='filter-buttons'>
+  <button
+    className={`filter-btn ${filterStatus === 'all' ? 'active' : ''}`}
+    onClick={() => setFilterStatus('all')}
+  >
+    All
+  </button>
+  <button
+  className={`filter-btn ${filterStatus === 'completed' ? 'active' : ''}`}
+  onClick={() => setFilterStatus('completed')}
+  >
+    Completed
+  </button>
+  <button
+  className={`filter-btn ${filterStatus === 'pending' ? 'active' : ''}`}
+  onClick={() => setFilterStatus('pending')}
+  >
+    Pending
+  </button>
+</div>  
 
   <form onSubmit={addMainTask} className='add-task-form'>
     <input
@@ -298,7 +345,7 @@ return (
       {tasks.length === 0 ? (
         <p className="empty-state">No hay tareas. ¡Agrega una para empezar!</p>
       ) : (
-        tasks.map(task => (
+        getFilteredTask(tasks).map(task => (
           <TaskItem 
             key={task.id}
             task={task}
