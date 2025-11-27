@@ -5,25 +5,23 @@
 }
 
 :root {
-  --bg-primary: #2A3A2E;        /* Fondo principal oscuro */
-  --bg-secondary: #415245;      /* Cards y contenedores */
-  --bg-tertiary: #8D9F91;       /* Hover states */
+  --bg-primary: #2A3A2E;
+  --bg-secondary: #415245;
+  --bg-tertiary: #8D9F91;
   
-  --accent-primary: #8C8159;    /* Botones principales */
-  --accent-secondary: #8D9F91;  /* Acentos secundarios */
+  --accent-primary: #8C8159;
+  --accent-secondary: #8D9F91;
   
-  --text-primary: #E8F0EC;      /* Texto principal */
-  --text-secondary: #B5C4BA;    /* Texto secundario */
+  --text-primary: #E8F0EC;
+  --text-secondary: #B5C4BA;
   
-  /* Transparencias útiles */
   --overlay-light: rgba(141, 159, 145, 0.1);
   --overlay-medium: rgba(141, 159, 145, 0.2);
 }
 
-
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color:  var(--bg-primary);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
 }
@@ -41,7 +39,6 @@ h1 {
   margin-bottom: 2rem;
   color: var(--accent-secondary);
 }
-
 
 .progress-container {
   background: var(--bg-secondary);
@@ -134,7 +131,6 @@ h1 {
   font-size: 1.1rem;
 }
 
-/* Task Item */
 .task-item-wrapper {
   transition: margin 0.2s;
 }
@@ -217,7 +213,7 @@ h1 {
 
 @media (max-width: 768px) {
   .task-actions {
-    opacity: 1;  
+    opacity: 1;
   }
 }
 
@@ -312,13 +308,12 @@ h1 {
   gap: 0.5rem;
 }
 
-/* Footer */
 .footer {
- margin-top: 4rem;
+  margin-top: 4rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(141, 159, 145, 0.2);  /* ← Verde sutil */
+  border-top: 1px solid rgba(141, 159, 145, 0.2);
   text-align: center;
-  color: var(--text-secondary);  /* ← Verde claro */
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
@@ -327,7 +322,7 @@ h1 {
 }
 
 .footer strong {
-   color: var(--accent-secondary);  /* ← Verde medio */
+  color: var(--accent-secondary);
   font-weight: 600;
 }
 
@@ -339,13 +334,13 @@ h1 {
 }
 
 .footer a {
-  color: var(--accent-primary);  /* ← Verde oliva */
+  color: var(--accent-primary);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .footer a:hover {
-  color: var(--accent-secondary);  /* ← Verde medio al hover */
+  color: var(--accent-secondary);
   text-decoration: underline;
 }
 
@@ -379,21 +374,101 @@ h1 {
   color: #ffa500;
 }
 
-/*  estilos para el datepicker*/
+.filter-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--text-secondary);
+  background-color: transparent;
+  color: var(--text-primary);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent-secondary);
+  background-color: var(--overlay-light);
+}
+
+.filter-btn.active {
+  background-color: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  color: var(--bg-primary);
+  font-weight: bold;
+}
+
+.search-container {
+  margin: 1rem 0;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--text-secondary);
+  border-radius: 20px;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-secondary);
+  background-color: var(--bg-tertiary);
+  box-shadow: 0 0 8px rgba(141, 159, 145, 0.3);
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.date-checkboc-container {
+  display: inline-block;
+  
+}
+
+.date-checkboc-container label {
+display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  user-select: none;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--text-secondary);
+  border-radius: 20px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.date-checkboc-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--accent-secondary);
+}
 
 .date-picker-wrapper {
   margin: 0.5rem 0;
 }
 
 .date-picker-input {
-   padding: 0.5rem 0.75rem;
-  border: 1px solid var(--text-secondary);
-  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--text-secondary);
+  border-radius: 8px;
   background-color: var(--bg-secondary);
   color: var(--text-primary);
   font-size: 0.9rem;
-  width: 100%;
-  max-width: 300px;
 }
 
 .date-picker-input:focus {
@@ -401,13 +476,3 @@ h1 {
   border-color: var(--accent-secondary);
   background-color: var(--bg-tertiary);
 }
-
-.date-picker-input:focus {
-  outline: none;
-  border-color: var(--accent-secondary);
-  background-color: var(--bg-tertiary);
-}
-
-
-
-
