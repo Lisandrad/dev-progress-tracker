@@ -1,3 +1,4 @@
+import { background } from "@chakra-ui/react";
 import { useState } from "react";
 
 function TaskItem({
@@ -10,6 +11,7 @@ function TaskItem({
     onAddSubtask,
     addingSubtaskTo,
     setAddingSubtaskTo,
+    CATEGORIES
     
 }) {
     const [subtaskText, setSubtaskText] = useState('');
@@ -67,7 +69,15 @@ function TaskItem({
             </div>
            )}
 
-          </div>
+           {task.category && CATEGORIES[task.category] && (
+            <div 
+              className='task-category-badge'
+              style={{ backgroundColor: CATEGORIES[task.category].color }}
+            >
+              {CATEGORIES[task.category].label}
+            </div>
+          )}
+          </div> 
 
           <div className="task-actions">
             <button

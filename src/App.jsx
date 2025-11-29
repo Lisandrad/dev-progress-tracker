@@ -4,6 +4,14 @@ import { initialTasks } from './data.js'
 import TaskItem from './TaskItem.jsx' 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { label } from 'framer-motion/client';
+
+const CATEGORIES = {
+  none: {label: 'Sin categoria', color: '#8D9F91'},
+  trabajo: {label: 'Trabajo', color:'#667EEA' },
+  personal: {label: 'Personal', color: '#F093FB'},
+  urgente: {label: 'Urgente', color: '#4ECDC4'}
+};
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -13,6 +21,9 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(null)
   const [searchText, setSearchText] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState('none');
+  const [filterCategory, setFilterCategory] = useState('all');
+
 
 
  useEffect(() => {
@@ -181,13 +192,15 @@ const addMainTask = (e) => {
     completed: false,
     expanded: true,
     dueDate: selectedDate ? selectedDate.toISOString() : null,
-    subtasks: []
+    subtasks: [],
+    category: selectedCategory
   };  
 
   setTasks([...tasks, newTask]);
   setNewTaskText ('');
   setSelectedDate(null);
   setShowDatePicker(false);
+  setSelectedCategory('none')
 };
 
 //para agregar tarea hija:
@@ -243,7 +256,11 @@ const getFilteredTask = (taskList) => {
     (filterStatus === 'completed' && task.completed) ||
     (filterStatus === 'pending' && !task.completed);
 
-    return matchesSearch && matchesStatus
+    const matchesCategory = 
+    filterCategory === 'all' || 
+    task.category === filterCategory
+
+    return matchesSearch && matchesStatus && matchesCategory
   })
 }
 
@@ -295,6 +312,22 @@ return (
   </button>
 </div>  
 
+{/* para filtrar categorias*/}
+
+  <div className='category-filter-buttons'>
+    <button className={`filter-btn ${filterCategory === 'all' ? 'active' : ''}`}
+    onClick={() => setFilterCategory('all')}    
+    > All
+    </button>
+    {Object.entries(CATEGORIES).map(([key, value]) => (
+      <button key={key} className={`filter-btn ${filterCategory === key ? 'active' : ''}`}
+        onClick={() => setFilterCategory(key)}
+      > {value.label}
+      </button>
+    ))}
+      
+  </div> 
+
   <form onSubmit={addMainTask} className='add-task-form'>
     <input
     type= 'text'
@@ -335,6 +368,21 @@ return (
   }
 </div>
 
+  {/*Para seleccionar categorias */}
+  
+  <div className='category-selector'>
+    <select
+    value={selectedCategory}
+    onChange={(e) => setSelectedCategory(e.target.value)}
+    className='category-select'>
+      {Object.entries(CATEGORIES).map(([key, value]) => (
+        <option key={key} value={key}>
+          {value.label}
+        </option>
+      ))}
+    </select>
+  </div>
+
 
     <button type='submit' className='add-button'>
       + Add Task
@@ -357,6 +405,7 @@ return (
             onAddSubtask={addSubtask}
             addingSubtaskTo={addingSubtaskTo}
             setAddingSubtaskTo={setAddingSubtaskTo}
+            CATEGORIES={CATEGORIES}
           />
         ))
       )}
